@@ -51,3 +51,30 @@ if (isset($_POST["sort"])) {
         echo "Нет данных";
     }
 }
+
+$str_form_search = "
+<div class=\"container\">
+    <h3>Search:</h3>
+    <form name='searchForm' action='index.php' method='post' onSubmit='return overify_login(this);'>
+        <input type='text' name='search' class='form-control'>
+        <input type='submit' name='gosearch' value='Confirm' class='btn btn-secondary my-2'>
+        <input type='reset' name='clear' value='Reset' class='btn btn-secondary my-2'>
+    </form>
+</div>";
+
+echo $str_form_search;
+
+if (isset($_POST['gosearch'])) {
+    $data = test_input($_POST['search']);
+    $out = out_search($data);
+
+// виклик функції out_arr() з action.php для отримання массиву
+    if (count($out) > 0) {
+        foreach ($out as $row) { //вывод массива построчно
+            echo $row;
+        }
+    } else // если нет данных
+    {
+        echo "Nothing found...";
+    }
+}
