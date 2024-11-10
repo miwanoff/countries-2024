@@ -9,6 +9,9 @@ if (isset($_POST["go"])) {
     if (check_autorize($login, $password)) {
         $autorized = true;
         echo "Hello, $login";
+        if (check_admin($login, $password)){
+            echo "<a href='hello.php?login=$login'>Просмотр отчета</a>";
+        }
     } else {
         echo "You are not registered";
     }
